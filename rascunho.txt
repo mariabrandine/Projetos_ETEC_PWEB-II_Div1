@@ -1,31 +1,3 @@
-<?php
-require './controle/conexao.php';
-$pdo = Conexao::conectar();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql =
-  "select 
-    proid,
-    pronome,
-    prodescricao,
-    provalorcusto,
-    provalorvenda,
-    proquantidade,
-    prosubid,
-    proativo,
-    subnome,
-    subcatid,
-    subativo,
-    catnome,
-    catativo
-from 
-    produtos,subcategorias,categorias
-where 
-    prosubid = subid
-and
-    subcatid = catid";
-$prpproduto = $pdo->prepare($sql);
-$prpproduto->execute();
-?>
 <!doctype html>
 <html lang="pt-BR">
 
@@ -48,7 +20,7 @@ $prpproduto->execute();
         <input type="text" name="busca" id="busca" class="form-control" />
       </div>
       <div class="row mt-2">
-        <?php while ($dsproduto = $prpproduto->fetch(PDO::FETCH_ASSOC)) { ?>
+        <?php while ($dsproduto = $prp->fetch(PDO::FETCH_ASSOC)) { ?>
           <div class="col mt-2">
             <div class="card" style="width: 18rem">
               <img src="" class="card-img-top img-fluid" alt="..." />
@@ -70,3 +42,27 @@ $prpproduto->execute();
 </body>
 
 </html>
+
+
+
+
+select 
+    proid,
+    pronome,
+    prodescricao,
+    provalorcusto,
+    provalorvenda,
+    proquantidade,
+    prosubid,
+    proativo,
+    subnome,
+    subcatid,
+    subativo,
+    catnome,
+    catativo
+from 
+    produtos,subcategorias,categorias
+where 
+    prosubid = subid
+and
+    subcatid = catid
